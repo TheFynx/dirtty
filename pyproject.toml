@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "dir-chat"
+name = "dirtty"
 version = "0.1.0"
-description = ""
+description = "Terminal-based AI assistant for querying your local document collections"
 authors = ["Levi Smith <levi@fynx.me>"]
 readme = "README.md"
 
