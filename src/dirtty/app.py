@@ -9,6 +9,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class DirttyApp(App):
     CSS = """
     Screen {
@@ -65,12 +66,16 @@ class DirttyApp(App):
         self.query_one("#chat-input").focus()
 
     def apply_theme(self):
+        logger.debug(f"Applying theme: {self.theme_name}")
         theme_data = get_theme(self.theme_name)
-        logger.debug(f"Applying theme: {theme_data}")
+        logger.debug(f"Theme data received: {theme_data}")
         colors = theme_data.get("colors", {})
+        logger.debug(f"Colors to apply: {colors}")
         for color_name, color_value in colors.items():
+            logger.debug(f"Setting {color_name} to {color_value}")
             setattr(self.styles, color_name, color_value)
         self.dark = theme_data.get("dark", False)
+        logger.debug(f"Dark mode set to: {self.dark}")
         logger.info(f"Applied theme: {self.theme_name}")
 
     def on_input_submitted(self, event: Input.Submitted) -> None:
@@ -80,9 +85,11 @@ class DirttyApp(App):
 
         try:
             response = self.query_engine.chat(message)
-            self.query_one("#chat-messages", RichLog).write(f"Assistant: {str(response)}")
+            self.query_one("#chat-messages",
+                           RichLog).write(f"Assistant: {str(response)}")
         except Exception as error:
-            self.query_one("#chat-messages", RichLog).write(f"Error: {str(error)}", style="bold red")
+            self.query_one(
+                "#chat-messages", RichLog).write(f"Error: {str(error)}", style="bold red")
 
         input_widget.value = ""
         self.query_one("#chat-messages").scroll_end(animate=False)

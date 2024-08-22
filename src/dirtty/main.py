@@ -1,5 +1,6 @@
 import logging
 import sys
+import os
 from pathlib import Path
 from dirtty.cli import parse_args
 from dirtty.helpers import setup_logging, clear_screen
@@ -10,6 +11,7 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core.memory import ChatMemoryBuffer
 import multiprocessing
 from dirtty.directory_selector import DirectorySelector
+from dirtty.themes import dump_theme_info
 
 # Disable tqdm globally
 from functools import partialmethod
@@ -85,6 +87,12 @@ def main():
             sys.exit(1)
         directory = Path(selected_directory)
 
+    logger.debug(f"Project root contents: {os.listdir(Path(__file__).parent.parent.parent)}")
+
+    dump_theme_info()
+
+    logger.debug(f"Selected theme: {opts['theme']}")
+
     try:
         documents = load_documents(directory)
         llm = setup_llm(opts['model_name'])
@@ -93,7 +101,9 @@ def main():
 
         logger.info("Starting TUI")
         app = DirttyApp(directory, query_engine, opts['theme'])
+        logger.debug(f"DirttyApp created with theme: {app.theme_name}")
         app.run()
+
     except ValueError as error:
         logger.error(str(error))
         print(f"Error: {str(error)}")
