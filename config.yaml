@@ -1,0 +1,4 @@
+log_level: DEBUG
+model_name: llama3:latest
+model_type: ollama
+theme: synthwave

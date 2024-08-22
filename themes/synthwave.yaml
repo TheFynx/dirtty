@@ -1,0 +1,13 @@
+name: synthwave
+dark: true
+colors:
+  primary: "#ff00ff"
+  secondary: "#721d89"
+  background: "#2b213a"
+  surface: "#241b2f"
+  panel: "#362f45"
+  boost: "rgba(255, 255, 255, 0.05)"
+  success: "#72f1b8"
+  warning: "#fede5d"
+  error: "#fe4450"
+  accent: "#f97e72"

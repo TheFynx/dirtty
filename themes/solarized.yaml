@@ -1,0 +1,13 @@
+name: solarized
+dark: true
+colors:
+  primary: "#268bd2"
+  secondary: "#6c71c4"
+  background: "#002b36"
+  surface: "#073642"
+  panel: "#094652"
+  boost: "rgba(255, 255, 255, 0.05)"
+  success: "#859900"
+  warning: "#b58900"
+  error: "#dc322f"
+  accent: "#2aa198"

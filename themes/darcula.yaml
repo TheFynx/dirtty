@@ -1,0 +1,13 @@
+name: darcula
+dark: true
+colors:
+  primary: "#3c3f41"
+  secondary: "#323232"
+  background: "#2B2B2B"
+  surface: "#3c3f41"
+  panel: "#4e5254"
+  boost: "rgba(255, 255, 255, 0.05)"
+  success: "#A8C023"
+  warning: "#D6BF55"
+  error: "#FF6B68"
+  accent: "#5394EC"

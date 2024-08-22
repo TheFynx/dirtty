@@ -1,0 +1,60 @@
+version: "3"
+
+vars:
+  POETRY_RUN: poetry run
+  DEFAULT_OLLAMA_MODEL: latest
+  MAIN_PY: src/dirtty/main.py
+
+tasks:
+  default:
+    desc: Show help
+    cmds:
+      - task --list-all
+
+  run:
+    desc: Run the dirtty application
+    cmds:
+      - "{{.POETRY_RUN}} dirtty {{.CLI_ARGS}}"
+
+  run:ollama:
+    desc: Run dirtty with Ollama model
+    vars:
+      MODEL_VERSION: "{{.MODEL_VERSION | default .DEFAULT_OLLAMA_MODEL}}"
+    cmds:
+      - task: run
+        vars:
+          CLI_ARGS: --model-name llama3:{{.MODEL_VERSION}} {{.CLI_ARGS}}
+
+  install:
+    desc: Install project dependencies
+    cmds:
+      - poetry install
+
+  update:
+    desc: Update project dependencies
+    cmds:
+      - poetry update
+
+  test:
+    desc: Run tests
+    cmds:
+      - "{{.POETRY_RUN}} pytest"
+
+  lint:
+    desc: Run linter
+    cmds:
+      - "{{.POETRY_RUN}} flake8"
+
+  format:
+    desc: Format code
+    cmds:
+      - "{{.POETRY_RUN}} black ."
+
+  clean:
+    desc: Clean up generated files
+    cmds:
+      - rm -rf **/__pycache__
+      - rm -rf .pytest_cache
+      - rm -rf .mypy_cache
+      - rm -rf dist
+      - rm -rf build

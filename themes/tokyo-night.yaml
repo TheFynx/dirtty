@@ -1,0 +1,13 @@
+name: tokyo-night
+dark: true
+colors:
+  primary: "#7aa2f7"
+  secondary: "#bb9af7"
+  background: "#1a1b26"
+  surface: "#24283b"
+  panel: "#2f3549"
+  boost: "rgba(255, 255, 255, 0.05)"
+  success: "#9ece6a"
+  warning: "#e0af68"
+  error: "#f7768e"
+  accent: "#7dcfff"
